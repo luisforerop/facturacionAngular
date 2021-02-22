@@ -1,0 +1,16 @@
+
+<mat-drawer-container autosize>
+  <mat-drawer #menu mode="side">
+    <a [routerLink]="['']">Inicio</a><br />
+    <a [routerLink]="['cliente']"> Cliente</a>
+  </mat-drawer>
+
+  <div>
+    <button mat-raised-button color="primary" type="button" (click)="menu.toggle()">Menú</button> <br /> <br />
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container>
+
+
+
+
