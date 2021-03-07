@@ -4,7 +4,7 @@ import { Respuesta } from '../Models/response';
 import { dialogClienteComponent } from './dialog/dialogcliente.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { timer } from 'rxjs';
+
 
 //CADA VEZ QUE CARQUE LA DIRECCIÓN DE CLIENTE, SE VA A EJECUTAR EL PROCESO CODIFICADO ACÁ
 
@@ -22,7 +22,7 @@ export class ClienteComponent implements OnInit {
   
   //Para que funcione el filtro con el nombre de la empresa
   public nombre: string = "" 
-
+  public prueba: any;
   //Creamos una variable pública any que va a almacenar los datos que recuperemos del método get
   public lst: any;
 
@@ -59,38 +59,50 @@ export class ClienteComponent implements OnInit {
 
   filtro() //Función para darle el uso de filtro al botón de cliente component
   {
+    let snackBarFiltro: any
     //Abrimos nuestro componente dialogcliente
     console.log("oprimio boton")
     //console.log(this.pruebita.pasarNombre)
+
+    //INICIALMENTE el filtro se creó para que reaccionara con un cuadro de diálogo, pero para mejorar la UX vamos a usar un snackbar
+    /*
     const dialogRef = this.dialog.open(dialogClienteComponent, {
      width: '300'
     })
     //Una vez que se cierre el cuadro de diálogo va a ejecutar:
     dialogRef.afterClosed().subscribe(r => { this.getClientes(this.nombre); })
+    */
+
+    //EL FILTRO SE EJECUTA TAN PRONTO SE ACTIVA LA SNACKBAR
+    snackBarFiltro = this.snackbar.open('Filtrando por ' + this.nombre, '', { duration: 1500 });
+    snackBarFiltro.afterDismissed().subscribe(() => {
+      this.getClientes(this.nombre);
+      
+    });
   }
 
   editar(datos: Respuesta) {
-
+    let snackBarRef: any;
     
     //datos.estado = "Recién procesado"; //Comando para reinicializar todo el ciclo
     
     switch (datos.estado) {
       case "Recién procesado":
         {
-          datos.estado = "Primer recordatorio";
-          this.snackbar.open('Primer recordatorio enviado', '', { duration: 1500 });
+          //datos.estado = "Primer recordatorio";
+          snackBarRef = this.snackbar.open('Primer recordatorio enviado', '', { duration: 1750 });
           break;
         }
       case "Primer recordatorio":
         {
-          datos.estado = "Segundo recordatorio";
-          this.snackbar.open('Segundo recordatorio enviado', '', { duration: 1500 });
+          //datos.estado = "Segundo recordatorio";
+          snackBarRef = this.snackbar.open('Segundo recordatorio enviado', '', { duration: 1750 });
           break;
         }
       case "Segundo recordatorio":
         {
-          datos.estado = "Desactivado";
-          this.snackbar.open('La factura se ha desactivado', '', { duration: 1500 })
+          //datos.estado = "Desactivado";
+          snackBarRef = this.snackbar.open('La factura se ha desactivado', '', { duration: 1750 })
           break;
         }
       default: {
@@ -99,17 +111,24 @@ export class ClienteComponent implements OnInit {
       }
     }/**/
 
-    //Editamos el Json para enviar la modificación del estado
-
+    //Ejecuta el método edit
     this.apiCliente.edit(datos).subscribe(i => console.log(`${i} este es i`));
+    console.log("acabamos de enviar la petición");
 
+       
+    //Cuando se cierra el snackbar se actualiza la lista
+    snackBarRef.afterDismissed().subscribe(() => {
+      this.getClientes(this.nombre);
+      console.log('The snack-bar was dismissed');
+    });
     //Esta sección tiene opción de mejora para verificar si se actualizo el dato o no, ya que en ocasiones la base de datos puede tardar unos milisegundos en actualizar la información. Se puede implementar un ciclo while que repita la próxima instrucción hasta que sea diferente a la que ingresó
-    
-    this.getClientes(this.nombre);
 
+    
   }
 
 
 
 }
+
+
 

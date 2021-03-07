@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\facturacion",
+    "\\facturacion\\e2e",
+    "\\facturacion\\src",
+    "\\facturacion\\src\\app",
+    "\\facturacion\\src\\app\\cliente",
+    "\\facturacion\\src\\app\\cliente\\dialog",
+    "\\facturacion\\src\\app\\home",
+    "\\facturacion\\src\\app\\Models",
+    "\\facturacion\\src\\app\\services"
+  ],
+  "SelectedNode": "\\facturacion\\src\\app\\cliente\\cliente.component.ts",
+  "PreviewInSolutionExplorer": false
+}

@@ -13,7 +13,8 @@ export interface Respuesta {
   fechaCreacion: string;
   estado: string;
   pago: boolean;
-  fechaPago: string;// 
+  fechaPago: string;//
+  email: string;
 
 
 }
