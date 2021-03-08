@@ -7,10 +7,11 @@
     "\\facturacion\\src\\app",
     "\\facturacion\\src\\app\\cliente",
     "\\facturacion\\src\\app\\cliente\\dialog",
+    "\\facturacion\\src\\app\\facturacion",
     "\\facturacion\\src\\app\\home",
     "\\facturacion\\src\\app\\Models",
     "\\facturacion\\src\\app\\services"
   ],
-  "SelectedNode": "\\facturacion\\src\\app\\cliente\\cliente.component.ts",
+  "SelectedNode": "\\facturacion\\src\\app\\services\\aplidatos.service.ts",
   "PreviewInSolutionExplorer": false
 }

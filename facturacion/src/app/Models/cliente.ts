@@ -1,8 +1,14 @@
 export interface cliente {
-  nombre: string;
+  //id: string;
+  empresa: string;
+  nit: string;
+  ciudad: string;
+  email: string;
+  encargado: string;
 }
 
-export interface estado {
+export interface factura {
   id: string;
   estado: string;
 }
+

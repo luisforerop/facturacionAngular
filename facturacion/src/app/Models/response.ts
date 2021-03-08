@@ -14,7 +14,7 @@ export interface Respuesta {
   estado: string;
   pago: boolean;
   fechaPago: string;//
-  email: string;
+  //email: string;
 
 
 }

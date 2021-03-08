@@ -2,7 +2,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { estado } from '../Models/cliente';
+import { cliente } from '../Models/cliente';
 //Importamos nuestra clase response
 import { Respuesta } from '../Models/response';
 //import { empresa } from '../cliente/cliente.component';
@@ -23,7 +23,7 @@ const httpOption = {  //Estas epecificaciones sirven para que cuando hagamos una
 
 export class ApiclienteService {
     //Agregamos la url a la cual nos vamos a conectar
-  public prueba = '/Exito';
+  //public prueba = '/Exito';
   
   url: string = 'https://localhost:5001/api/Factura';
   constructor(
@@ -57,7 +57,7 @@ export class ApiclienteService {
   add(cliente: cliente): Observable<Respuesta> //El método add va a recibir un objeto llamado cliente del tipo cliente, que es la intarface |Será un observable que devuelve un objeto Respuesta 
   {
     return this._http.post<Respuesta>(this.url, cliente, httpOption); //Especifico que tipo de respuesta del metodo post vamos a cargar, y enviamos la url, el cliente y el tipo de opcion de http
-  }*/
+  }/**/
   
 }
 //ESTE COMPONENTE LO VAMOS A INVOCAR DESDE NUESTRO COMPONENTE CLIENTE

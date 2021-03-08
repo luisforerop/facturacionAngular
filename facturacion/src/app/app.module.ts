@@ -8,7 +8,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { HomeComponent } from './home/home.component';
 import { ClienteComponent } from './cliente/cliente.component';
+import { FacturacionComponent } from './facturacion/facturacion.component';
 import { dialogClienteComponent } from './cliente/dialog/dialogcliente.component';
+//import { dialogFacturaComponent } from './factura/dialog/dialogfactura.component';
+
 //IMPORTAMOS MÓDULO PARA HACER PETICIONES HTTP
 import { HttpClientModule } from '@angular/common/http';
 //Importamos las tablas de material
@@ -27,7 +30,9 @@ import { FormsModule } from '@angular/forms';
     AppComponent,
     HomeComponent,
     ClienteComponent,
-    dialogClienteComponent
+    dialogClienteComponent,
+    FacturacionComponent,
+    //dialogFacturaComponent
   ],
   imports: [
     BrowserModule,
