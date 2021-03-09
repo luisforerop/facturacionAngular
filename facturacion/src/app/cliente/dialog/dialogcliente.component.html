@@ -1,10 +1,39 @@
-<h1 mat-dialog-title>FILTRA FACTURAS POR NOMBRE DE LA EMPRESA</h1> 
+<h1 mat-dialog-title>{{ datos != null ? 'EDITAR CLIENTE' : 'NUEVO CLIENTE' }}</h1> 
+
+
 <div mat-dialog-content>
-    Vamos a filtrar por el nombre que nos suministro.
+  <mat-form-field appearance="outline">
+    <mat-label>NOMBRE DE LA EMPRESA</mat-label> 
+    <input matInput [(ngModel)]="empresa"  >
+  </mat-form-field>
+   |
+  <mat-form-field appearance="outline">
+    <mat-label>NIT</mat-label>
+    <input matInput [(ngModel)]="nit">
+    <mat-hint>Ej: 901.652.212</mat-hint>
+  </mat-form-field>
+    |
+  <mat-form-field appearance="outline">
+    <mat-label>CIUDAD</mat-label> 
+    <input matInput [(ngModel)]="ciudad"  >
+  </mat-form-field>
+  <br><br> 
+  <mat-form-field appearance="outline">
+    <mat-label>EMAIL</mat-label> 
+    <input matInput [(ngModel)]="email"  >
+  </mat-form-field>
+    |
+  <mat-form-field appearance="outline">
+    <mat-label>ENCARGADO</mat-label> 
+    <input matInput [(ngModel)]="encargado"  >
+    <mat-hint>Puede ser el gerente</mat-hint>
+  </mat-form-field>
+  <br>
+
 </div>
 
-<div mat-dialog-actions>
-  <button mat-raised-button (click)="close()">Filtrar</button>
-  
+<div mat-dialog-actions >
+  <button mat-raised-button color="warn" (click)="close()"> {{nombreBoton}}</button>
+  <button mat-raised-button color="primary" (click)="datos != null ? updateCliente() : addCliente() ">{{nombreBoton2}}</button>
   
 </div>

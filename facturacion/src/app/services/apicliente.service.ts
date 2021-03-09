@@ -7,7 +7,7 @@ import { cliente } from '../Models/cliente';
 import { Respuesta } from '../Models/response';
 //import { empresa } from '../cliente/cliente.component';
 
-//Con el content type especificamos que nuestra solicitud puede llevar un json
+//Con el content type especificamos que nuestra solicitud puede llevar un json. Esta constante es un objeto
 const httpOption = {  //Estas epecificaciones sirven para que cuando hagamos una petición por post enviamos estos encabezados
   headers: new HttpHeaders({ // headers es un tipo de objeto de HttpHeaders
     'Content-Type': 'application/json' //Damos el content type del encabezado de una solicitud http
@@ -45,19 +45,25 @@ export class ApiclienteService {
 
   //MÉTODO DE EDICIÓN DE DATOS
   edit(estado: Respuesta): Observable<Respuesta> { 
-    console.log("Entramos a edit por medio del clickeo en cambiar..");
-    console.log(estado);
-    console.log("el anterior es el dato recibido")
+    //console.log("Entramos a edit por medio del clickeo en cambiar..");
+    //console.log(estado);
+    //console.log("el anterior es el dato recibido")
     return this._http.put<Respuesta>(this.url, estado, httpOption); //El tipo estado indica que pasamos una id y los datos a corregir
 
   }
 
 
-  /* //Método para agregar datos. Para evitar cualquier posible conflicto lo comentamos.
-  add(cliente: cliente): Observable<Respuesta> //El método add va a recibir un objeto llamado cliente del tipo cliente, que es la intarface |Será un observable que devuelve un objeto Respuesta 
+  //Método para agregar datos. 
+  add(factura: Respuesta): Observable<Respuesta> //El método add va a recibir un objeto llamado cliente del tipo cliente, que es la intarface |Será un observable que devuelve un objeto Respuesta 
   {
-    return this._http.post<Respuesta>(this.url, cliente, httpOption); //Especifico que tipo de respuesta del metodo post vamos a cargar, y enviamos la url, el cliente y el tipo de opcion de http
+    return this._http.post<Respuesta>(this.url, factura, httpOption); //Especifico que tipo de respuesta del metodo post vamos a cargar, y enviamos la url, el cliente y el tipo de opcion de http
   }/**/
+
+  delete(id: string): Observable<Respuesta> {
+    console.log("ingresamos a delete clientes por apidatos");
+    return this._http.delete<Respuesta>(`${this.url}/${id}`, httpOption);
+  }
+
   
 }
 //ESTE COMPONENTE LO VAMOS A INVOCAR DESDE NUESTRO COMPONENTE CLIENTE

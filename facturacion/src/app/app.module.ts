@@ -10,6 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { ClienteComponent } from './cliente/cliente.component';
 import { FacturacionComponent } from './facturacion/facturacion.component';
 import { dialogClienteComponent } from './cliente/dialog/dialogcliente.component';
+import { DialogfacturacionComponent } from './facturacion/dialogfacturacion/dialogfacturacion.component';
 //import { dialogFacturaComponent } from './factura/dialog/dialogfactura.component';
 
 //IMPORTAMOS MÓDULO PARA HACER PETICIONES HTTP
@@ -25,6 +26,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
 //import { Component } from '@angular/core';
 
+//LAS DEPENDENCIAS SON INYECTADAS POR MEDIO DE imports A LOS QUE ESTÉN AGREGADOS EN declarations, así que si queremos inyectar algún componente que creamos en otro, tenemos que agregarlo en imports
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,6 +35,7 @@ import { FormsModule } from '@angular/forms';
     ClienteComponent,
     dialogClienteComponent,
     FacturacionComponent,
+    DialogfacturacionComponent,
     //dialogFacturaComponent
   ],
   imports: [

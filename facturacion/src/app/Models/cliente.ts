@@ -1,5 +1,5 @@
 export interface cliente {
-  //id: string;
+  id: string;
   empresa: string;
   nit: string;
   ciudad: string;
@@ -7,8 +7,4 @@ export interface cliente {
   encargado: string;
 }
 
-export interface factura {
-  id: string;
-  estado: string;
-}
 

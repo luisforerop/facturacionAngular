@@ -8,6 +8,7 @@ import { cliente } from '../Models/cliente';
 //import { dialogClienteComponent } from './dialog/dialogcliente.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DialogfacturacionComponent } from './dialogfacturacion/dialogfacturacion.component';
 
 
 //CADA VEZ QUE CARQUE LA DIRECCIÓN DE CLIENTE, SE VA A EJECUTAR EL PROCESO CODIFICADO ACÁ
@@ -59,7 +60,7 @@ export class FacturacionComponent implements OnInit {
 
     this.apiCliente.getCliente(gcliente).subscribe(Respuesta => { /*Con el this especificamos que es el objeto que creamos en el constructor cuando inyectamos apiclient */
       this.lst = Respuesta;
-      console.log(Respuesta);
+      console.log("Esta es respuesta, que debería ser una lista " + Respuesta);
     })
 
     //ESTA ES LA API PARA LOS CLIENTES
@@ -68,12 +69,7 @@ export class FacturacionComponent implements OnInit {
     //  console.log(cliente);
    // })
 
-
-
-
   }
-
-
 
   filtro() //Función para darle el uso de filtro al botón de cliente component
   {
@@ -99,7 +95,7 @@ export class FacturacionComponent implements OnInit {
     });
   }
 
-  editar(datos: Respuesta) {
+  editar(datos: Respuesta) {//Obtenemos los datos de respuesta desde el element presente en cliente.component.html que se carga cuando se ejecuta get
 
     let snackBarRef: any;
 
@@ -141,8 +137,15 @@ export class FacturacionComponent implements OnInit {
     });
     //Esta sección tiene opción de mejora para verificar si se actualizo el dato o no, ya que en ocasiones la base de datos puede tardar unos milisegundos en actualizar la información. Se puede implementar un ciclo while que repita la próxima instrucción hasta que sea diferente a la que ingresó
 
+  }//end edit
 
-
+  openAdd() {
+    console.log("NUeva factura");
+   /* */const dialogRef = this.dialog.open(DialogfacturacionComponent, {
+      width: '300'
+    })
+    //Una vez que se cierre el cuadro de diálogo va a ejecutar:
+    //dialogRef.afterClosed().subscribe(r => { this.getClientes(this.nombre); })
   }
 
 

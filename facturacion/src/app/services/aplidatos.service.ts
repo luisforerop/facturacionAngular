@@ -29,17 +29,25 @@ export class AplidatosService {
     return this._http.get<cliente>(`${this.url}/${nEmpresa}`);
   }
 
-  edit(estado: cliente): Observable<cliente> {
+  edit(cliente: cliente): Observable<cliente> {
     console.log("Entramos a edit por medio del clickeo en cambiar..");
-    console.log(estado);
-    console.log("el anterior es el dato recibido")
-    return this._http.put<cliente>(this.url, estado, httpOption); //El tipo estado indica que pasamos una id y los datos a corregir
+    console.log(cliente);
+    console.log("el anterior es el dato recibido");
+    return this._http.put<cliente>(this.url, cliente, httpOption); //El tipo estado indica que pasamos una id y los datos a corregir
 
   }
 
   add(cliente: cliente): Observable<cliente> 
   {
+    console.log("ingresamos a add clientes por apidatos");
+    console.log(cliente);
     return this._http.post<cliente>(this.url, cliente, httpOption); //Especifico que tipo de respuesta del metodo post vamos a cargar, y enviamos la url, el cliente y el tipo de opcion de http
   }
+
+  delete(id : string): Observable<cliente> {
+    console.log("ingresamos a delete clientes por apidatos");
+    return this._http.delete<cliente>(`${this.url}/${id}`, httpOption); 
+  }
+
 
 }
