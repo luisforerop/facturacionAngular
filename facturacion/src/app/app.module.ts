@@ -22,6 +22,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDividerModule } from '@angular/material/divider';
+
+import { MatSelectModule } from '@angular/material/select'; //Habilitamos la creación de un select o lista desplegable
+
+import { MatCheckboxModule } from '@angular/material/checkbox';
+
 //Importamos para el formulario
 import { FormsModule } from '@angular/forms';
 //import { Component } from '@angular/core';
@@ -54,6 +60,10 @@ import { FormsModule } from '@angular/forms';
     //Formularios
     FormsModule,
    // Component,
+    MatDividerModule,
+    MatSelectModule,
+
+    MatCheckboxModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -5,7 +5,7 @@ export interface Respuesta {
   id: string; //
   empresa: string;
   ciudad: string; //
-  nit: number; //
+  nit: string; //
   total: number;//
   subtotal: number;
   iva: number; //

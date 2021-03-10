@@ -7,10 +7,6 @@ import { cliente } from '../../Models/cliente';
 import { AplidatosService } from '../../services/aplidatos.service';
 import { MatDialog } from '@angular/material/dialog';
 
-
-
-
-
   
 //El @ es un Decorador que permite darle un comportamiento a una clase
 @Component({
@@ -20,7 +16,8 @@ import { MatDialog } from '@angular/material/dialog';
 
 
 export class dialogClienteComponent {
-  
+
+
   public nombre: string = "hola" //Esta variable la usamos para hacer pruebas con ngModel, que vincula una variable con los campos de un formulario. Para usarla se debe agregar FormsModule en app.module y para que quede doblemente (actualización de variables en tiempo real) ligado usamos [(ngModel)]="nombre"
   public nombreBoton: string = "Cancelar";
   public nombreBoton2: string = "Agregar";

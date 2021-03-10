@@ -30,7 +30,7 @@ export class FacturacionComponent implements OnInit {
   public lst: any;
 
   //Arreglo de string para especificar las columnas que se van a mostrar
-  public columnas: string[] = ["id", "empresa", "ciudad", "nit", "total", "subtotal", "iva", "retencion", "estado", "pago", "fechaCreacion", "fechaPago", "editar"];
+  public columnas: string[] = ["id", "empresa", "ciudad", "nit", "total", "subtotal", "iva", "retencion", "estado", "fechaCreacion", "fechaPago", "editar"];
 
 //  public columnas: string[] = ["empresa", "ciudad", "nit", "email", "encargado", "editar"];
 
@@ -53,7 +53,7 @@ export class FacturacionComponent implements OnInit {
   ngOnInit(): void {
     //Hacemos que se ejecute el método getClientes
     this.getClientes(""); //inicializamos nuestro método teniendo como gcliente un string sin ninguna cadena de texto.
-  }
+   }
 
   //Creamos un método para poder refrescar nuestros listados y que no dependa del constructor
   getClientes(gcliente: string) {
@@ -78,15 +78,6 @@ export class FacturacionComponent implements OnInit {
     console.log("oprimio boton")
     //console.log(this.pruebita.pasarNombre)
 
-    //INICIALMENTE el filtro se creó para que reaccionara con un cuadro de diálogo, pero para mejorar la UX vamos a usar un snackbar
-    /*
-    const dialogRef = this.dialog.open(dialogClienteComponent, {
-     width: '300'
-    })
-    //Una vez que se cierre el cuadro de diálogo va a ejecutar:
-    dialogRef.afterClosed().subscribe(r => { this.getClientes(this.nombre); })
-    */
-
     //EL FILTRO SE EJECUTA TAN PRONTO SE ACTIVA LA SNACKBAR
     snackBarFiltro = this.snackbar.open('Filtrando por ' + this.nombre, '', { duration: 1500 });
     snackBarFiltro.afterDismissed().subscribe(() => {
@@ -98,7 +89,7 @@ export class FacturacionComponent implements OnInit {
   editar(datos: Respuesta) {//Obtenemos los datos de respuesta desde el element presente en cliente.component.html que se carga cuando se ejecuta get
 
     let snackBarRef: any;
-
+    let validar = true;
     //datos.estado = "Recién procesado"; //Comando para reinicializar todo el ciclo
 
     switch (datos.estado) {
@@ -120,34 +111,76 @@ export class FacturacionComponent implements OnInit {
           snackBarRef = this.snackbar.open('La factura se ha desactivado', '', { duration: 1750 })
           break;
         }
+      case "Pagado":
+        {
+          this.snackbar.open('La factura está pagada', '', { duration: 1500 })
+          validar = false;
+          break;
+        }
       default: {
         this.snackbar.open('La factura está desactivada', '', { duration: 1500 })
-
+        validar = false;
       }
     }/**/
 
+    if (validar) {
     //Ejecuta el método edit
     this.apiCliente.edit(datos).subscribe(i => console.log(`${i} este es i`));
     console.log("acabamos de enviar la petición");
-
     //Cuando se cierra el snackbar se actualiza la lista
     snackBarRef.afterDismissed().subscribe(() => {
       this.getClientes(this.nombre);
       console.log('The snack-bar was dismissed');
     });
+    }
+
     //Esta sección tiene opción de mejora para verificar si se actualizo el dato o no, ya que en ocasiones la base de datos puede tardar unos milisegundos en actualizar la información. Se puede implementar un ciclo while que repita la próxima instrucción hasta que sea diferente a la que ingresó
 
   }//end edit
 
+  pagar(datos: Respuesta) {
+
+    let snackBarRef: any;
+    console.log(datos.estado);
+    //VALIDACIÓN
+    if (datos.estado == "Desactivado") {
+         snackBarRef = this.snackbar.open('Factura desactivada', '', { duration: 1750 });
+    }
+    else if (datos.estado == "Pagado") {
+      snackBarRef = this.snackbar.open('Esta factura ya está paga', '', { duration: 1750 });
+    }
+    else {
+      datos.fechaPago = this.obtenerFecha();
+      datos.pago = true;
+
+      snackBarRef = this.snackbar.open('Pagando...', '', { duration: 1750 });
+      this.apiCliente.edit(datos).subscribe(i => snackBarRef = this.snackbar.open('Factura pagada', '', { duration: 1750 }));
+
+      //ENVÍO DE INFO AL BACKEND
+      //ACTUALIZACIÓN DE DATOS
+      snackBarRef.afterDismissed().subscribe(() => {
+        this.getClientes(this.nombre); });
+    }
+
+  }
+
   openAdd() {
     console.log("NUeva factura");
    /* */const dialogRef = this.dialog.open(DialogfacturacionComponent, {
-      width: '300'
+      width: '800'
     })
     //Una vez que se cierre el cuadro de diálogo va a ejecutar:
-    //dialogRef.afterClosed().subscribe(r => { this.getClientes(this.nombre); })
+    dialogRef.afterClosed().subscribe(r => { this.getClientes(this.nombre); })
   }
 
+  obtenerFecha() {
+    let fecha = new Date();
+    let year = fecha.getFullYear();
+    let day = fecha.getDate();
+    let month = fecha.getMonth();
+    let fechaPago = `${day}/${month + 1}/${year}`;
+    return fechaPago; 
+  }
 
 }
 
